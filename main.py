@@ -4,9 +4,8 @@ from model import *
 def menu():
     print("========== CHECK ATTENDANCE ==========")
     print("1. Add Student.")
-    print("2. Student Information.")
-    print("3. Run model.")
-    print("4. Out")
+    print("2. Run model.")
+    print("3. Out")
     print("======================================")
 
 def check_input():
@@ -29,10 +28,8 @@ def main():
             training()
             print("Done!")
         if choice == 2:
-            print(1)
-        if choice == 3:
             run()
-        if choice == 4:
+        if choice == 3:
             print("Thank You!")
 
 

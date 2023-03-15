@@ -72,15 +72,22 @@ def run():
             face = data.image_preprocessing(face)
             face = [face]
             face = pca.transform(face)
-            y_predict = model.predict(face)
-            name = label[y_predict[0]]
-
-            cv.putText(frame, name, (x, y), cv.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2, cv.LINE_AA)
-            cv.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 2)
+            y_predict = model.predict_proba(face)
+            index = list(y_predict[0]).index(max(y_predict[0]))
+            if max(y_predict[0]) >= 0.6:
+                name = label[index]
+                cv.putText(frame, name, (x, y), cv.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv.LINE_AA)
+                cv.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
+            else:
+                name = "Unknown"
+                cv.putText(frame, name, (x, y), cv.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2, cv.LINE_AA)
+                cv.rectangle(frame, (x, y), (x+w, y+h), (0, 0, 255), 2)
 
         cv.imshow("Webcam", frame)
         if cv.waitKey(1) & 0xFF == ord('d'):
             break
+    capture.release()
+    cv.destroyAllWindows()
 
 
 # run()
