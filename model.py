@@ -45,7 +45,7 @@ def training():
     y_predict = clf.predict(pca.transform(X_test))
     print("Performance Of The Model")
     print(classification_report(y_test, y_predict))
-    joblib.dump(clf, "D:/myCode/CPV301/Assignment/file_and_data/file/model.npy")
+    joblib.dump(clf, "D:/attendance_program_with_hog_linearsvc/file_and_data/file/model.npy")
 
 #rRun model;
 def run():
@@ -73,7 +73,6 @@ def run():
             face = [face]
             face = pca.transform(face)
             y_predict = model.predict(face)
-            print(y_predict, y_predict[0])
             name = label[y_predict[0]]
 
             cv.putText(frame, name, (x, y), cv.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2, cv.LINE_AA)
